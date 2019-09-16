@@ -1,0 +1,84 @@
+(ns clojure-primer2.core
+  (:require [clojure.string :as str])
+  (:gen-class))
+
+(odd? 15)
+(even? 12)
+(pos? -150)
+(neg? -25)
+
+(defn atom-pre
+  [x]
+  (def atomPree (atom x))
+  (add-watch atomPree :watcher
+       (fn [key atom pre posle]
+         (println "atom neki promenjen iz" pre " u " posle )
+         ))
+  (println "1. x" @atomPree)
+  (reset! atomPree 10)
+  (println "2. x" @atomPree)
+  (swap! atomPree inc)
+  (println "Increment je sada x" @atomPree)
+  )
+
+(defn atom-ja
+  [x]
+  (def jaPokusaj (atom x))
+  (fn [key atom pre posle]
+(println "Pre: " pre " u " posle)
+    )
+  (println "1.x" @jaPokusaj)
+  (reset! jaPokusaj 10)
+  (println "2.x" @jaPokusaj)
+  (swap! jaPokusaj inc)
+  (println "Increment x" @jaPokusaj)
+  )
+
+(defn agent-pr
+  []
+  (def karte-prodate (agent 0))
+  (send karte-prodate + 15)
+  (println)
+  (println "Karte: " @karte-prodate)
+  
+  (send karte-prodate + 10)
+  (await-for 100 karte-prodate)
+  (println "Karte: " @karte-prodate)
+  
+  (shutdown-agents)
+  )
+
+
+
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+
+  (agent-pr)
+
+  
+  ;;(atom-pre 5)
+  ;;(atom-ja 7)
+
+
+
+  
+ ;; (def along 15)
+  ;; (nil?  along)
+;; (def jeca  "Jelena!")
+  ;;(def lgn 15)
+  ;;(format "Ovo je string %s" jeca)
+  ;;(format "5 razmaka %5d" lgn)
+  ;;(format "nule %04d" lgn)
+  ;;(format "%-4d levo poravnjanje" lgn)
+ ;; (def str1 "Ovo je string. ")
+  ;;(str/blank? str1)
+  ;;(str/includes? str1 "je")
+ ;; (str/split str1 #" " )
+  ;;(str/replace str1 #"je" "je super")
+  ;;(println (list* "Jelena" 21 "godina" [58]))
+  
+  
+  
+  )
+
